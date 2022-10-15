@@ -11,6 +11,8 @@ export class ProductsHeaderComponent implements OnInit {
 
   //para enivar para outro component o numero de colunas
   @Output() columnsCountChange = new EventEmitter<number>();
+  @Output() itemsContagenTrocar = new EventEmitter<number>();
+  @Output() sortTrocar = new EventEmitter<string>();
 
   sort_desc = 'Ordem';
   itemsMostrarConta = 12;
@@ -22,10 +24,13 @@ export class ProductsHeaderComponent implements OnInit {
 
   onSortUpdated(newSort: string): void {
     this.sort_desc = newSort;
+    this.sortTrocar.emit(newSort);
+
   }
 
   onItemsUpdated(count: number): void {
-    this.itemsMostrarConta = count;
+    this.itemsMostrarConta =count;
+    this.itemsContagenTrocar.emit(count);    
   }
 
   onColunmnsUpdated(colNum: number): void {

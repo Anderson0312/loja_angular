@@ -11,7 +11,8 @@
 
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon class="mb-2"
-            [matBadge]="5"
+            [matBadge]="itemsQuantidade"
+            [matBadgeHidden]="!itemsQuantidade"
             matBadgeColor="warn" 
             >shopping_cart</mat-icon>
 
@@ -19,41 +20,26 @@
         <mat-menu #menu="matMenu">
             <div class="p-3 divide-y divide-solid">
                 <div class="pb-3 flex justify-between">
-                    <span class="mr-12">1 Items</span>
+                    <span class="mr-12">{{itemsQuantidade}} Items</span>
                     <a routerLink="/cart" class="mb-5">Visualizar Carrinho</a>
                 </div>
 
 
-                <div class="py-3">               
-                     <div class="flex justify-between font-light mb-2">
-                        <span class="">Telefone x2</span>
-                        <span class="font-bold">{{"350" | currency}}</span>
-                    </div>
-
-                    <div class="flex justify-between font-light mb-2">
-                        <span class="">Telefone x3</span>
-                        <span class="font-bold">{{"350" | currency}}</span>
-                    </div>
-
-                    <div class="flex justify-between font-light mb-2">
-                        <span class="">Telefone x4</span>
-                        <span class="font-bold">{{"350" | currency}}</span>
-                    </div>
-
-                    <div class="flex justify-between font-light mb-2">
-                        <span class="">Telefone x5</span>
-                        <span class="font-bold">{{"350" | currency}}</span>
+                <div class="py-3" *ngIf="cart.items.length">               
+                     <div *ngFor="let item of cart.items" class="flex justify-between font-light mb-2">
+                        <span class="">{{item.name}} x {{item.quantity}}</span>
+                        <span class="font-bold">{{ item.price | currency}}</span>
                     </div>
                 </div>
 
                 <div class="flex justify-between py-3 font-light">
                     <span class="">Total</span>
-                    <span class="font-bold">{{"800" | currency}}</span>
+                    <span class="font-bold">{{getTotal(cart.items) | currency}}</span>
                 </div>
 
                 
                 <div class="pt-3 flex justify-between">
-                    <button class="bg-yellow-500 text-white rounded-full w-8 h-8">
+                    <button (click)="onLimparCart()"class="bg-yellow-500 text-white rounded-full w-8 h-8">
                         <mat-icon>remove_shopping_cart</mat-icon>
                     </button>
                     <button class="bg-green-500 text-white rounded-full w-8 h-8">

@@ -9,16 +9,10 @@ export class ProductBoxComponent implements OnInit {
 
   @Input() fullWidthMode = false;
 
-  product: Product| undefined = {
-    id: 1,
-    title: "Sapato Nike",
-    price: 250,
-    category: "sapato",
-    description: "Sapato masculino Nike",
-    img: 'https://imgnike-a.akamaihd.net/1300x1300/022104ID.jpg',
-  };
+  @Input() product: Product| undefined;
 
   @Output() addToCart = new EventEmitter();
+  
 
   constructor() { }
 
@@ -27,6 +21,7 @@ export class ProductBoxComponent implements OnInit {
 
   onAddToCarrinho(): void {
     this.addToCart.emit(this.product);
+    
   }
 
 

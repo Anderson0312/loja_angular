@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from '@coreui/angular';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -24,6 +26,9 @@ import { FiltersComponent } from './pages/home/components/filters/filters.compon
 import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CartService } from './services/cart.service';
+import { CarouselComponent } from './components/header/carousel/carousel.component';
+import { StoreService } from './services/store.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,9 +39,12 @@ import { CartService } from './services/cart.service';
     ProductsHeaderComponent,
     FiltersComponent,
     ProductBoxComponent,
-    CartComponent
+    CartComponent,
+    CarouselComponent
   ],
   imports: [
+    IconModule,
+    CarouselModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -51,9 +59,10 @@ import { CartService } from './services/cart.service';
     MatToolbarModule,
     MatTableModule,
     MatBadgeModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
-  providers: [CartService],
+  providers: [CartService, IconSetService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
